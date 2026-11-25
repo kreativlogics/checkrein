@@ -1,0 +1,57 @@
+{
+  "name": "checkrein",
+  "version": "0.1.0",
+  "description": "An enforcing install gate for skills and plugins (quarantine, scan, ledger, drift check), a guard that stops secrets being written into files, commands or outbound tool calls, and deterministic rules against guard tampering. Stdlib Python, no network, no dependencies.",
+  "author": {
+    "name": "KreativLogics",
+    "url": "https://github.com/kreativlogics"
+  },
+  "homepage": "https://github.com/kreativlogics/checkrein",
+  "repository": "https://github.com/kreativlogics/checkrein",
+  "license": "MIT",
+  "keywords": [
+    "security",
+    "guardrails",
+    "hooks",
+    "secrets",
+    "skills",
+    "supply-chain",
+    "install-gate"
+  ],
+  "userConfig": {
+    "preset": {
+      "type": "string",
+      "title": "Preset",
+      "description": "relaxed asks where standard denies; strict adds the shared-tree rules, the staged-commit scan and the MCP write gate. Project files can only make this stricter.",
+      "options": [
+        "relaxed",
+        "standard",
+        "strict"
+      ],
+      "default": "standard"
+    },
+    "fail_mode": {
+      "type": "string",
+      "title": "If checkrein itself fails",
+      "description": "What happens when a config file is broken or the guard crashes: ask you, deny the action, or allow it silently.",
+      "options": [
+        "ask",
+        "deny",
+        "allow"
+      ],
+      "default": "ask"
+    },
+    "scanner_command": {
+      "type": "string",
+      "title": "Skill scanner command (optional)",
+      "description": "A third-party scanner the install gate runs on quarantined code. Use {path} for the folder and {report} for a report file, e.g. skillspector scan {path} --no-llm --format json --output {report}. Leave empty to use only the built-in checks (verdicts then stop at REVIEW).",
+      "default": ""
+    }
+  },
+  "network": {
+    "hosts": [
+      "github.com"
+    ]
+  },
+  "icon": ".claude-plugin/icon.png"
+}

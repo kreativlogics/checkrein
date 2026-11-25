@@ -1,0 +1,29 @@
+{
+  "description": "checkrein: checks tool calls before they run, and reports skill and plugin drift when a session starts.",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -I -S \"${CLAUDE_PLUGIN_ROOT}/scripts/guard.py\" pre",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -I -S \"${CLAUDE_PLUGIN_ROOT}/scripts/guard.py\" session",
+            "timeout": 20
+          }
+        ]
+      }
+    ]
+  }
+}
