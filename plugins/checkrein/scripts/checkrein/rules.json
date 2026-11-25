@@ -1,0 +1,266 @@
+{
+  "version": 1,
+  "rules": {
+    "GIT01": {
+      "group": "git",
+      "title": "Force push, remote branch delete or mirror push",
+      "levels": [
+        "off",
+        "ask",
+        "deny"
+      ],
+      "presets": {
+        "relaxed": "ask",
+        "standard": "deny",
+        "strict": "deny"
+      },
+      "notes": "A force push to a protected branch is denied at any level except off. --force-with-lease is one step softer than the rule level."
+    },
+    "GIT02": {
+      "group": "git",
+      "title": "Discarding local work: reset --hard, checkout -f, switch --discard-changes",
+      "levels": [
+        "off",
+        "ask",
+        "deny"
+      ],
+      "presets": {
+        "relaxed": "ask",
+        "standard": "ask",
+        "strict": "ask"
+      }
+    },
+    "GIT03": {
+      "group": "git",
+      "title": "Forced git clean",
+      "levels": [
+        "off",
+        "ask",
+        "deny"
+      ],
+      "presets": {
+        "relaxed": "ask",
+        "standard": "ask",
+        "strict": "ask"
+      }
+    },
+    "GIT04": {
+      "group": "tamper",
+      "title": "Skipping git hooks: --no-verify, commit -n, HUSKY=0 and similar",
+      "levels": [
+        "off",
+        "ask",
+        "deny"
+      ],
+      "presets": {
+        "relaxed": "ask",
+        "standard": "deny",
+        "strict": "deny"
+      }
+    },
+    "GIT05": {
+      "group": "tamper",
+      "title": "Changing core.hooksPath or writing into .git/hooks",
+      "levels": [
+        "off",
+        "ask",
+        "deny"
+      ],
+      "presets": {
+        "relaxed": "deny",
+        "standard": "deny",
+        "strict": "deny"
+      }
+    },
+    "GIT06": {
+      "group": "shared-tree",
+      "title": "Shared-tree commands: stash, restore, checkout -- <path>, add -A, commit -a",
+      "levels": [
+        "off",
+        "ask",
+        "deny"
+      ],
+      "presets": {
+        "relaxed": "off",
+        "standard": "off",
+        "strict": "ask"
+      }
+    },
+    "SEC01": {
+      "group": "secrets",
+      "title": "A secret in content written by Write, Edit, MultiEdit or NotebookEdit",
+      "levels": [
+        "off",
+        "ask",
+        "deny"
+      ],
+      "presets": {
+        "relaxed": "ask",
+        "standard": "deny",
+        "strict": "deny"
+      }
+    },
+    "SEC02": {
+      "group": "secrets",
+      "title": "A real-format token typed into a shell command",
+      "levels": [
+        "off",
+        "ask",
+        "deny"
+      ],
+      "presets": {
+        "relaxed": "deny",
+        "standard": "deny",
+        "strict": "deny"
+      }
+    },
+    "SEC03": {
+      "group": "secrets",
+      "title": "A secret in staged changes when git commit runs (uses gitleaks when installed)",
+      "levels": [
+        "off",
+        "ask",
+        "deny"
+      ],
+      "presets": {
+        "relaxed": "off",
+        "standard": "off",
+        "strict": "deny"
+      }
+    },
+    "SKL01": {
+      "group": "install-gate",
+      "title": "Copying, downloading or cloning files into skill or plugin folders outside the gate",
+      "levels": [
+        "off",
+        "ask",
+        "deny"
+      ],
+      "presets": {
+        "relaxed": "deny",
+        "standard": "deny",
+        "strict": "deny"
+      }
+    },
+    "SKL02": {
+      "group": "install-gate",
+      "title": "Installing a plugin or adding a marketplace the ledger has not approved",
+      "levels": [
+        "off",
+        "ask",
+        "deny"
+      ],
+      "presets": {
+        "relaxed": "ask",
+        "standard": "deny",
+        "strict": "deny"
+      }
+    },
+    "SKL03": {
+      "group": "install-gate",
+      "title": "Third-party skill installers run through a package runner (npx, bunx, pnpm dlx, pipx, uvx)",
+      "levels": [
+        "off",
+        "ask",
+        "deny"
+      ],
+      "presets": {
+        "relaxed": "ask",
+        "standard": "deny",
+        "strict": "deny"
+      }
+    },
+    "SKL04": {
+      "group": "install-gate",
+      "title": "Gate decisions (approve, override, adopt, forget) need a person",
+      "levels": [
+        "off",
+        "ask",
+        "deny"
+      ],
+      "presets": {
+        "relaxed": "ask",
+        "standard": "ask",
+        "strict": "ask"
+      }
+    },
+    "SKL05": {
+      "group": "install-gate",
+      "title": "Drift report at session start: skills or plugins changed since approval, or never vetted",
+      "levels": [
+        "off",
+        "report"
+      ],
+      "presets": {
+        "relaxed": "report",
+        "standard": "report",
+        "strict": "report"
+      }
+    },
+    "SLF01": {
+      "group": "tamper",
+      "title": "Edits to checkrein's own files, config, approvals or ledger",
+      "levels": [
+        "off",
+        "ask",
+        "deny"
+      ],
+      "presets": {
+        "relaxed": "deny",
+        "standard": "deny",
+        "strict": "deny"
+      },
+      "notes": "checkrein's own config and gate commands are asked about instead of denied."
+    },
+    "MCP01": {
+      "group": "outbound",
+      "title": "MCP tools that write to another system (create, update, delete, send, post...)",
+      "levels": [
+        "off",
+        "ask",
+        "deny"
+      ],
+      "presets": {
+        "relaxed": "off",
+        "standard": "off",
+        "strict": "ask"
+      },
+      "notes": "The ask shows the payload with secrets hidden. Tools matching an mcp_routine glob (your own config only) pass."
+    },
+    "MCP02": {
+      "group": "outbound",
+      "title": "A secret inside an outbound MCP tool call",
+      "levels": [
+        "off",
+        "ask",
+        "deny"
+      ],
+      "presets": {
+        "relaxed": "deny",
+        "standard": "deny",
+        "strict": "deny"
+      }
+    }
+  },
+  "defaults": {
+    "protected_branches": [
+      "main",
+      "master",
+      "develop",
+      "trunk",
+      "production",
+      "prod",
+      "release/*"
+    ],
+    "installers": [
+      "skills",
+      "add-skill",
+      "openskills",
+      "skillkit",
+      "claude-plugins"
+    ],
+    "mcp_write_tools": [
+      "mcp__*__{create,update,delete,remove,edit,add,post,send,transition,merge,accept,comment,publish,write,save,upload,move,archive,assign,close,reopen,invite,share,set,apply,fork,link,execute_write,executewrite,execute_destructive,executedestructive}*"
+    ]
+  }
+}

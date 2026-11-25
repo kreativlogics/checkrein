@@ -1,0 +1,15 @@
+{
+  "name": "checkrein",
+  "owner": {
+    "name": "Salman Ahmad",
+    "url": "https://github.com/kreativlogics"
+  },
+  "description": "checkrein: an enforcing install gate and secret guard for Claude Code.",
+  "plugins": [
+    {
+      "name": "checkrein",
+      "source": "./plugins/checkrein",
+      "description": "Install gate for skills and plugins, secret guard, and guard-tamper rules for Claude Code."
+    }
+  ]
+}
